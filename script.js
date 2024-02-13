@@ -1,9 +1,9 @@
 const dropdowns = document.querySelectorAll(".filter-dropdown");
 
 dropdowns.forEach((dd) => {
+  const reset = dd.closest(".filter_wrapper").querySelector(".filter_reset");
   const ddLabel = dd.querySelector(".filter-dropdown_label");
   const initialLabelText = ddLabel.textContent;
-  console.log(initialLabelText);
   let checkedFilters = [
     ...dd.querySelectorAll(".filter-checkbox_button.w--redirected-checked"),
   ];
@@ -16,7 +16,9 @@ dropdowns.forEach((dd) => {
   } else if (checkedFilters.length > 1) {
     ddLabel.textContent = `${checkedFilters.length} filters`;
   }
-
+  reset.addEventListener("click", () => {
+    ddLabel.textContent = initialLabelText;
+  });
   dd.addEventListener("click", (e) => {
     if (e.target.tagName === "LABEL") {
       // Use requestAnimationFrame to ensure the code runs after rendering
