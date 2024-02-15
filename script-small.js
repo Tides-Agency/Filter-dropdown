@@ -2,36 +2,6 @@ const container = document.querySelector(".custom-t_cms-list");
 
 function filterDd() {
   const dropdowns = document.querySelectorAll(".filter-dropdown");
-  const filterMobButtonText = document.querySelector("#filters .button-text");
-
-  //Set applied filters num on mobile filters button on page load
-
-  const activeFiltersCounter = document.querySelectorAll(
-    ".filter-checkbox_button.w--redirected-checked"
-  ).length;
-  filterMobButtonText.textContent = activeFiltersCounter
-    ? `Filters(${activeFiltersCounter})`
-    : "Filters";
-
-  //Open/Close filters modal on mobile
-  document.querySelector("#filters").addEventListener("click", () => {
-    document
-      .querySelector(".custom-t_filters-outer-wrap")
-      .classList.add("is-active");
-  });
-  document
-    .querySelector(".custom-t_close-modal")
-    .addEventListener("click", () => {
-      const activeFiltersCounter = document.querySelectorAll(
-        ".filter-checkbox_button.w--redirected-checked"
-      ).length;
-      filterMobButtonText.textContent = activeFiltersCounter
-        ? `Filters(${activeFiltersCounter})`
-        : "Filters";
-      document
-        .querySelector(".custom-t_filters-outer-wrap")
-        .classList.remove("is-active");
-    });
 
   dropdowns.forEach((dd) => {
     const reset = dd.closest(".filter_wrapper").querySelector(".filter_reset");
@@ -56,6 +26,7 @@ function filterDd() {
     }
     reset.addEventListener("click", () => {
       ddLabel.textContent = initialLabelText;
+      reset.classList.remove("is-active");
     });
     dd.addEventListener("click", (e) => {
       if (e.target.tagName === "LABEL") {
